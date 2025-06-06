@@ -45,7 +45,7 @@ class ImageDisplayApp:
 
         self.header_label = tk.Label(
             self.header_frame,
-            text="EMG Calibration Interface",
+            text="EMG Acquisition Interface",
             font=("Helvetica", 18, "bold"),
             fg="white",
             bg=self.header_bg
