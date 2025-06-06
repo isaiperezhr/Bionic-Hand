@@ -13,3 +13,6 @@ EMG_data/
 
 # Ignore IDE-specific files
 .vscode/
+
+# Ignore virtual environment
+.venv/
