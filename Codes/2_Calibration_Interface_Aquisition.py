@@ -13,7 +13,7 @@ class ImageDisplayApp:
     def __init__(self, root):
         self.root = root
         self.root.title("EMG Bionic Hand Calibration")
-        self.countdown = 5
+        self.countdown = 15
         self.counter = 0
         self.subject_ID = ""
         self.session_number = ""
@@ -251,11 +251,11 @@ class ImageDisplayApp:
         # Update status
         self.label_timer.config(text="Connecting...", fg=self.accent_color)
         self.status_message.config(
-            text="Attempting to connect to COM5...", fg=self.accent_color)
+            text="Attempting to connect to COM7...", fg=self.accent_color)
 
         # 2) Attempt to open serial port
         try:
-            self.ser = serial.Serial("COM5", 115200, timeout=1)
+            self.ser = serial.Serial("COM7", 115200, timeout=1)
             self.label_timer.config(text="Connected", fg=self.success_color)
             self.status_message.config(
                 text="Successfully connected. Preparing to start...", fg=self.success_color)
@@ -390,10 +390,10 @@ class ImageDisplayApp:
                 0, lambda n=self.interval_num: self.progress.configure(value=n-1))
 
             # Decide which instruction to show
-            if self.interval_num == 1:
+            if self.interval_num in (1, 3, 5):
                 instruction = "Rest"
                 color = "#0abde3"  # Blue for rest
-            elif self.interval_num in (2, 4, 6):
+            elif self.interval_num in (2, 6):
                 instruction = "Open Hand"
                 color = "#2ed573"  # Green for open
             else:
