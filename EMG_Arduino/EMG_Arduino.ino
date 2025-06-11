@@ -1,38 +1,35 @@
-/*
-  MyoWare Example_01_analogRead_SINGLE
-  SparkFun Electronics
-  Pete Lewis
-  3/24/2022
-  License: This code is public domain but you buy me a beverage if you use this and we meet someday.
-  This code was adapted from the MyoWare analogReadValue.ino example found here:
-  https://github.com/AdvancerTechnologies/MyoWare_MuscleSensor
+#include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
 
-  This example streams the data from a single MyoWare sensor attached to ADC A0.
-  Graphical representation is available using Serial Plotter (Tools > Serial Plotter menu).
+// --------------------------------------------------
+// Ejemplo MyoWare streaming + control LED por clase
+// --------------------------------------------------
 
-  *Only run on a laptop using its battery. Do not plug in laptop charger/dock/monitor.
-
-  *Do not touch your laptop trackpad or keyboard while the MyoWare sensor is powered.
-
-  Hardware:
-  SparkFun RedBoard Artemis (or Arduino of choice)
-  USB from Artemis to Computer.
-  Output from sensor connected to your Arduino pin A0
-
-  This example code is in the public domain.
-*/
-
-void setup() 
-{
+void setup() {
   Serial.begin(115200);
-  while (!Serial); // optionally wait for serial terminal to open
+  while (!Serial);                 // Espera al monitor serie
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
-void loop() 
-{  
-  int sensorValue = analogRead(A3); // read the input on analog pin A0
+void loop() {
+  // 1) Leer EMG y mandar al PC
+  int sensorValue = analogRead(A3); // Cambia a A0 si tu sensor está ahí
+  Serial.println(sensorValue);
 
-  Serial.println(sensorValue); // print out the value you read
+  // 2) Leer clase enviada por Python y controlar LED
+  emgControl();
 
-  delay(50); // to avoid overloading the serial terminal
+  delay(50);
+}
+
+void emgControl() {
+  if (Serial.available() > 0) {
+    int classVal = Serial.parseInt();    // Lee hasta dígitos
+    Serial.readStringUntil('\n');        // Limpia el '\n'
+    if (classVal == 0) {
+      digitalWrite(LED_BUILTIN, HIGH);
+    } else {
+      digitalWrite(LED_BUILTIN, LOW);
+    }
+  }
 }
