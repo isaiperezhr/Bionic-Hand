@@ -16,7 +16,8 @@ X = features[['Mean value', 'Std Dev', 'Maximum']]
 y = features['Output']
 
 # Paso 3: Dividir los datos en conjuntos de entrenamiento y prueba
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.1, random_state=42)
 
 # Modelo de Árbol de Decisión
 # Crear y entrenar el modelo de Árbol de Decisión
@@ -28,7 +29,8 @@ y_pred_tree = tree_model.predict(X_test)
 
 # Calcular la precisión del modelo
 accuracy_tree = accuracy_score(y_test, y_pred_tree)
-print("Precisión del modelo de Árbol de Decisión: {:.2f}".format(accuracy_tree))
+print("Precisión del modelo de Árbol de Decisión: {:.2f}".format(
+    accuracy_tree))
 
 # Modelo SVM
 # Crear y entrenar el modelo SVM

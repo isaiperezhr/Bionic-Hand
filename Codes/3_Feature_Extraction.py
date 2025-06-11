@@ -9,6 +9,8 @@ time_window = 0.5  # segundos
 samples_per_window = int(sampling_rate * time_window)
 
 # Función para calcular características dentro de ventanas
+
+
 def calculate_features(arr):
     arr = np.array(arr)
     windowed_means = []
@@ -23,6 +25,7 @@ def calculate_features(arr):
             windowed_maxs.append(np.max(window))
 
     return np.mean(windowed_means), np.mean(windowed_stds), np.mean(windowed_maxs)
+
 
 # Definir el nombre del archivo CSV de salida
 output_file = 'emg_dataset.csv'
@@ -39,7 +42,14 @@ with open(output_file, mode='a' if file_exists else 'w', newline='') as file:
         writer.writerow(['Mean value', 'Std Dev', 'Maximum', 'Output'])
 
     # Iterar sobre todos los archivos CSV en la carpeta EMG_data
-    folder_path = 'EMG_data'
+    # Ruta del script actual
+    base_dir = os.path.dirname(__file__)
+
+    # Retroceder al root (padre de "Codes")
+    root_dir = os.path.abspath(os.path.join(base_dir, ".."))
+
+    # Ruta a la carpeta EMG_data/filtered desde root
+    folder_path = os.path.join(root_dir, "EMG_data", "filtered")
     for filename in os.listdir(folder_path):
         if filename.endswith('.csv'):
             file_path = os.path.join(folder_path, filename)
@@ -49,60 +59,61 @@ with open(output_file, mode='a' if file_exists else 'w', newline='') as file:
             df = pd.read_csv(file_path)
 
             # Inicializar arrays para almacenar los valores
-            rest = []
+            rest1 = []
+            rest2 = []
+            rest3 = []
             open1 = []
-            close1 = []
             open2 = []
+            close1 = []
             close2 = []
-            open3 = []
-            close3 = []
 
             # Clasificar los elementos de acuerdo con la tercera columna
             for _, row in df.iterrows():
-                value = row[1]  # Elemento de la segunda columna
-                label = row[2]  # Elemento de la tercera columna
+                value = row[1]  # Segunda columna
+                label = row[2]  # Tercera columna
 
                 if label == 1:
-                    rest.append(value)
+                    rest1.append(value)
                 elif label == 2:
                     open1.append(value)
                 elif label == 3:
-                    close1.append(value)
+                    rest2.append(value)
                 elif label == 4:
-                    open2.append(value)
+                    close1.append(value)
                 elif label == 5:
-                    close2.append(value)
+                    rest3.append(value)
                 elif label == 6:
-                    open3.append(value)
+                    open2.append(value)
                 elif label == 7:
-                    close3.append(value)
+                    close2.append(value)
 
-            # Calcular características para cada array
-            mean_rest, std_rest, max_rest = calculate_features(rest)
+            # Calcular características para cada segmento
+            mean_rest1, std_rest1, max_rest1 = calculate_features(rest1)
+            mean_rest2, std_rest2, max_rest2 = calculate_features(rest2)
+            mean_rest3, std_rest3, max_rest3 = calculate_features(rest3)
+
             mean_open1, std_open1, max_open1 = calculate_features(open1)
-            mean_close1, std_close1, max_close1 = calculate_features(close1)
             mean_open2, std_open2, max_open2 = calculate_features(open2)
+
+            mean_close1, std_close1, max_close1 = calculate_features(close1)
             mean_close2, std_close2, max_close2 = calculate_features(close2)
-            mean_open3, std_open3, max_open3 = calculate_features(open3)
-            mean_close3, std_close3, max_close3 = calculate_features(close3)
 
-            # Calcular promedios generales para los arrays "open" y "close"
-            mean_open = np.mean([mean_open1, mean_open2, mean_open3])
-            std_open = np.mean([std_open1, std_open2, std_open3])
-            max_open = np.mean([max_open1, max_open2, max_open3])
+            # Calcular promedios generales
+            mean_rest = np.mean([mean_rest1, mean_rest2, mean_rest3])
+            std_rest = np.mean([std_rest1, std_rest2, std_rest3])
+            max_rest = np.mean([max_rest1, max_rest2, max_rest3])
 
-            mean_close = np.mean([mean_close1, mean_close2, mean_close3])
+            mean_open = np.mean([mean_open1, mean_open2])
+            std_open = np.mean([std_open1, std_open2])
+            max_open = np.mean([max_open1, max_open2])
+
+            mean_close = np.mean([mean_close1, mean_close2])
             std_close = np.mean([std_close1, std_close2])
-            max_close = np.mean([max_close1, max_close2, max_close3])
+            max_close = np.mean([max_close1, max_close2])
 
             # Agregar las nuevas filas al archivo de salida
-            # Fila 1: Características de "rest"
-            writer.writerow([mean_rest, std_rest, max_rest, 0])
-
-            # Fila 2: Características promedio de "open"
-            writer.writerow([mean_open, std_open, max_open, 1])
-
-            # Fila 3: Características promedio de "close"
-            writer.writerow([mean_close, std_close, max_close, 2])
+            writer.writerow([mean_rest, std_rest, max_rest, 0])   # Rest
+            writer.writerow([mean_open, std_open, max_open, 1])   # Open
+            writer.writerow([mean_close, std_close, max_close, 2])  # Close
 
 print("Archivos procesados exitosamente y datos agregados al archivo 'emg_dataset.csv'.")
