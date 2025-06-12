@@ -27,18 +27,18 @@ constexpr uint16_t kPulseStep     = 5;
 
 // ====== MAPEO DINÁMICO CANAL->CLASE->ÁNGULO ======
 const uint8_t angleMap[kMaxServos][3] = {
-  { 90, 180, 0 },
-  { 90, 180, 0 },
-  { 90, 180, 0 },
-  { 90, 180, 0 },
-  { 90, 180, 0 },
-  { 90, 180, 0 },
-  { 90, 180, 0 },
-  { 90, 180, 0 },
-  { 90, 180, 0 },
-  { 90, 180, 0 },
-  { 90, 180, 0 },
-  { 90, 180, 0 }
+  { 25,   1, 50 },
+  { 25,   1, 50 },
+  { 90, 180,  0 },
+  { 90, 180,  0 },
+  { 90, 180,  0 },
+  { 90, 180,  0 },
+  { 90, 180,  0 },
+  { 90, 180,  0 },
+  { 90, 180,  0 },
+  { 90, 180,  0 },
+  { 90, 180,  0 },
+  { 90, 180,  0 }
 };
 uint8_t servoAngles[kMaxServos] = {0};
 
@@ -49,6 +49,7 @@ void setup() {
   pwm.begin();
   pwm.setOscillatorFrequency(kOscillatorFreq);
   pwm.setPWMFreq(kServoFrequency);
+  while (!Serial); 
   delay(10);
 }
 
@@ -101,10 +102,16 @@ void emgControl() {
       }
     }
     moveServosParallel(targetAngles);
-    Serial.println("Done");
   }
 }
 
 void loop() {
+  // 1) Leer EMG y mandar al PC
+  int sensorValue = analogRead(A3); 
+  Serial.println(sensorValue);
+
+  // 2) Leer clase enviada por Python y controlar servos
   emgControl();
+
+  delay(50);
 }
