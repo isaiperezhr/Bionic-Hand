@@ -27,18 +27,18 @@ constexpr uint16_t kPulseStep     = 5;
 
 // ====== MAPEO DINÁMICO CANAL->CLASE->ÁNGULO ======
 const uint8_t angleMap[kMaxServos][3] = {
-  { 25,   1, 50 },
-  { 25,   1, 50 },
-  { 90, 180,  0 },
-  { 90, 180,  0 },
-  { 90, 180,  0 },
-  { 90, 180,  0 },
-  { 90, 180,  0 },
-  { 90, 180,  0 },
-  { 90, 180,  0 },
-  { 90, 180,  0 },
-  { 90, 180,  0 },
-  { 90, 180,  0 }
+  { 50, 180,   0 },
+  { 50, 180,   0 },
+  { 50,   0, 180 },
+  { 50,   0, 180 },
+  { 50,   0, 180 },
+  { 25,   1,  50 },
+  { 25,   1,  50 },
+  { 90, 180,   0 },
+  { 90, 180,   0 },
+  { 90, 180,   0 },
+  { 90, 180,   0 },
+  { 90, 180,   0 }
 };
 uint8_t servoAngles[kMaxServos] = {0};
 
@@ -89,7 +89,7 @@ void moveServosParallel(const uint8_t targetAngles[]) {
 /**
  * @brief Lee la clase EMG y mueve los servos según el mapeo.
  */
-void emgControl() {
+void servoControl() {
   if (Serial.available() >= 1) {
     int classVal = Serial.parseInt();
     Serial.readStringUntil('\n');
@@ -106,12 +106,8 @@ void emgControl() {
 }
 
 void loop() {
-  // 1) Leer EMG y mandar al PC
-  int sensorValue = analogRead(A3); 
-  Serial.println(sensorValue);
-
-  // 2) Leer clase enviada por Python y controlar servos
-  emgControl();
+  // Leer clase enviada por Python y controlar servos
+  servoControl();
 
   delay(50);
 }
