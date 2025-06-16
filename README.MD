@@ -1,4 +1,4 @@
-Collecting workspace information# EMG Bionic Hand
+## Bionic Hand
 
 Este proyecto implementa un sistema completo de adquisición, procesamiento y clasificación de señales EMG para controlar una mano protésica biónica mediante dos Arduinos: uno para la adquisición de señales EMG y otro para el control de servomotores.
 
