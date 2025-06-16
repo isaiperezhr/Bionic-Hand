@@ -187,7 +187,7 @@ class ImageDisplayApp:
         # Status message
         self.status_message = tk.Label(
             self.status_frame,
-            text="Ready to start calibration",
+            text="Ready to start acquisition",
             font=("Helvetica", 10, "italic"),
             bg=self.bg_color,
             fg=self.text_color
@@ -197,7 +197,7 @@ class ImageDisplayApp:
         # Button to start the test
         self.start_button = tk.Button(
             self.main_frame,
-            text="Start Calibration",
+            text="Start Acquisition",
             font=("Helvetica", 12, "bold"),
             bg=self.accent_color,
             fg="white",
