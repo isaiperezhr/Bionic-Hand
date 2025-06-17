@@ -20,21 +20,18 @@ Este proyecto implementa un sistema de control para una mano biónica utilizando
 ## ✨ Características
 
 - 🔬 **Captura de señales EMG** en tiempo real
-- 🤖 **Control preciso** de servomotores
-- 📊 **Procesamiento de señales** con filtros digitales
-- 🎯 **Múltiples gestos** reconocibles
+- 🤖 **Control** de servomotores
+- 📊 **Procesamiento de señales**
 - ⚡ **Respuesta rápida** y fluida
-- 🔧 **Configuración personalizable**
 
 ## 🛠️ Componentes Hardware
 
 | Componente | Descripción | Cantidad |
 |------------|-------------|----------|
-| Arduino Uno/Nano | Microcontrolador principal | 1 |
-| Sensores EMG | Captación de señales musculares | 2-4 |
+| Arduino Uno/Nano | Microcontrolador principal | 2 |
+| Sensores EMG | Captación de señales musculares | 1 |
 | Servomotores | Actuadores para dedos | 5 |
-| Amplificador de señal | Acondicionamiento EMG | 1 |
-| Fuente de alimentación | 5V/2A | 1 |
+| Fuente de alimentación | 5V/3A | 1 |
 
 ## 📁 Estructura del Proyecto
 
@@ -52,6 +49,26 @@ EMG_Bionic_Hand/
 ├── 📂 examples/
 │   └── basic_control.ino     # Ejemplo básico
 └── README.md
+
+EMG_Bionic_Hand/
+├── 📂 Codes/
+│   ├── 2_Calibration_Interface_Aquisition.py   # Interfaz de calibración y adquisición de EMG
+│   ├── 3_Feature_Extraction.py                # Extracción de características de señales EMG
+│   ├── 4_Model_Training.py                    # Entrenamiento de modelos de clasificación
+│   ├── 5_RealTime_Classification.py           # Clasificación en tiempo real y comunicación con servidor
+│   ├── filtrar_datos.py                       # Filtrado de datos EMG crudos
+│   ├── prueba.py                              # Prueba de comunicación serial
+│   └── server.py                              # Servidor para control de servos vía socket
+├── 📂 EMG_Arduino/
+│   └── EMG_Arduino.ino                        # Código Arduino para adquisición de EMG
+├── 📂 Servos/
+│   └── Servos.ino                             # Código Arduino para control de servos
+├── 📂 EMG_data/
+│   └── ...                                    # Archivos CSV de sesiones EMG (crudos y filtrados)
+├── requirements.txt                           # Dependencias Python
+├── .gitignore                                 # Exclusiones de git
+├── MR3001B_Propuesta_Prótesis_A01412968.pdf   # Documento de propuesta
+├── README.MD                                  # Documentación principal del proyecto
 ```
 
 ## 🚀 Instalación
