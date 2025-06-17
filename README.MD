@@ -56,7 +56,7 @@ EMG_Bionic_Hand/
 │   ├── Subject_Aramis_Session_01_EMGdata_*.csv # Archivos CSV de sesiones EMG (crudos)
 │   └── filtered/                              # Carpeta de archivos CSV filtrados
 ├── emg_dataset.csv                            # Dataset de características EMG
-├── random_forest_model.pkl                    # Modelo Random Forest entrenado
+├── model.pkl                                  # Modelo entrenado
 ├── MR3001B_Propuesta_Prótesis_A01412968.pdf   # Documento de propuesta
 ├── requirements.txt                           # Dependencias Python
 ├── .gitignore                                 # Exclusiones de git
