@@ -130,6 +130,15 @@ EMG_Bionic_Hand/
 - **Precisión**: 85-95% en reconocimiento de gestos
 - **Latencia**: <=1000ms respuesta del sistema
 
+## 🎥 Demostración
+
+<div align="center">
+  <a href="https://youtu.be/cF7J30elUkk">
+    <img src="https://img.youtube.com/vi/cF7J30elUkk/maxresdefault.jpg" alt="Video Demo" width="600"/>
+  </a>
+  <p><i>Click en la imagen para ver el video de demostración</i></p>
+</div>
+
 ## 🤝 Contribuciones
 
 ¡Las contribuciones son bienvenidas! Por favor:
