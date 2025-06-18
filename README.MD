@@ -139,6 +139,18 @@ EMG_Bionic_Hand/
   <p><i>Click en la imagen para ver el video de demostración</i></p>
 </div>
 
+## 📑 Documentación Técnica
+
+<div align="center">
+  <a href="Perez_ProtesisEMG_IEEEpaper.pdf">
+    <img src="https://img.shields.io/badge/IEEE_Technical_Paper-Read_Full_Document-00629B?style=for-the-badge&logo=ieee" alt="Ver Paper" width="350"/>
+  </a>
+  
+  <p><em>I. Pérez-Herrera, "Diseño e Implementación de una Prótesis Biónica Controlada por Señales EMG mediante Machine Learning", Tecnológico de Monterrey, 2025.</em></p>
+
+  Para un análisis detallado de la metodología, arquitectura del sistema, procesamiento de señales EMG, modelos de machine learning implementados y resultados experimentales, consulte el documento técnico completo.
+</div>
+
 ## 🤝 Contribuciones
 
 ¡Las contribuciones son bienvenidas! Por favor:
